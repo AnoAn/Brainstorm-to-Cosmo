@@ -1,34 +1,25 @@
-cd 'C:\Users\tizia\Documents\MATLAB\S3_epochs'
-cd 'C:\Users\tizia\Documents\MATLAB'
+cd '' % directory with the files exported from BS, with the first file being the reference file in FieldTrip format
+% note that for this script to work the files in the target directory have to be organized
+% such as that the first half refer to condition A and the second half to condition B
 
-files=dir('*.mat');
+files=dir('*.mat'); % this will read all the .mat files exported from BS
 files.name
-files = files([1:(length(files)-1)])
-files.name
-%xx = in_bst_data(sFiles(1))
-%xyz = load(files(2).name)
+% files = files([1:(length(files)-1)]) % if an out.m is already present in the folder, this line will remove it from 'file'
+% files.name
 
-%[zxzx.grad] = zxzx.elec;
-%zxzx = rmfield(zxzx,'elec');
-%disp(zxzx)
-
-real = load(files(1).name)
-%file1 = cosmo_meeg_dataset(files(1).name)
-%file1.samples = real.avg
-datasets{1} = real.avg
+real = load(files(1).name) % read the reference file
+datasets{1} = real.avg % put the data of the first epoch in datasets
 for iFile=2:length(files)
-    %datasets{iFile}=file1;
     temp = load(files(iFile).name);
-    %datasets = {datasets,temp.F};
     datasets{iFile} = temp.F;
 end
-ds0 = cat(3,datasets{:});
-ds0 = permute(ds0, [3 1 2]);
-%ds0=cosmo_stack(datasets,1,'drop_nonunique')
+ds0 = cat(3,datasets{:}); % build the 3D matrix
+ds0 = permute(ds0, [3 1 2]); % permute
 
-save out.mat ds0
+save out.mat ds0 % save matrix in out.m
 
-
+% the rest of the script contains some minor adaptationsof the code present
+% on the Cosmo website on the following page: http://www.cosmomvpa.org/faq.html#import-brainstorm-data
 
 % Example script showing importing BrainStorm M/EEG time-locked data into
 % CoSMoMVPA.
@@ -59,8 +50,8 @@ save out.mat ds0
 % Indices of the trial conditions
 % - the first 90 trials are condition A
 % - the nextt 90 trials are condition B
-trials_condA=1:18;
-trials_condB=19:36;
+trials_condA=1:90;
+trials_condB=91:180;
 
 % load all data
 all_data=importdata('out.mat');
