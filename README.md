@@ -1,4 +1,4 @@
-# Brainstorm_to_Cosmo
+# Brainstorm to Cosmo
 
 This MATLAB script converts EEG epochs exported from Brainstorm (BS) into CoSMoMVPA format.
 Note that each epoch should represent a single run of a condition (the average of all the epochs of that condition in a single block of trials).
