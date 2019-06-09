@@ -18,7 +18,7 @@ ds0 = permute(ds0, [3 1 2]); % permute
 
 save out.mat ds0 % save matrix in out.m
 
-% the rest of the script contains some minor adaptationsof the code present
+% the rest of the script contains some minor modifications of the code present
 % on the Cosmo website on the following page: http://www.cosmomvpa.org/faq.html#import-brainstorm-data
 
 % Example script showing importing BrainStorm M/EEG time-locked data into
